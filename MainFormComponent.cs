@@ -25,6 +25,7 @@ namespace Reminder
             this.FormBorderStyle = FormBorderStyle.None;
             this.Name = "MainForm";
             this.Size = new Size(300, 500);
+            this.BackColor = Color.DimGray;
             this.Controls.Add(titleBar);
 
             this.ResumeLayout(false);
