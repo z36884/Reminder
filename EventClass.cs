@@ -18,17 +18,17 @@ namespace Reminder
 	private bool isFinished;
 	private bool isOverDated;
 
-	public EventClass(string name, int year, int month, int day, int hour, int minute, int importance, bool isFinished, bool isOverDated)
+	public EventClass(string name, int year, int month, int day, int hour, int minute, int importance, bool isFinished)
 	{
-	    this.name = name;
-	    this.year = year;
-	    this.month = month;
-	    this.day = day;
-	    this.hour = hour;
-	    this.minute = minute;
-	    this.importance = importance;
-	    this.isFinished = isFinished;
-	    this.isOverDated = isOverDated;
+	    this.Name = name;
+	    this.Year = year;
+	    this.Month = month;
+	    this.Day = day;
+	    this.Hour = hour;
+	    this.Minute = minute;
+	    this.Importance = importance;
+	    this.IsFinished = isFinished;
+	    this.IsOverDated = true;
 	}
 
 	public string Name 
@@ -81,17 +81,18 @@ namespace Reminder
 
 	public bool IsOverDated
 	{
-	    get 
+	    get { return isOverDated; }
+	    set 
 	    {
 		DateTime saveNow = DateTime.Now;
-		
-		if((saveNow.Year>=year)&&(saveNow.Month>=month)&&(saveNow.Day>=day)&&(saveNow.Hour>=hour)&&(saveNow.Minute>=minute))
-		    isOverDated = false;
-		else
+		long r1,r2;
+		r1 = year*100000000+month*1000000+day*10000+hour*100+minute;
+		r2 = saveNow.Year*100000000+saveNow.Month*1000000+saveNow.Day*10000+saveNow.Hour*100+saveNow.Minute;
+		if(r1<r2)
 		    isOverDated = true;
-		return isOverDated;
+		else
+		    isOverDated = false;
 	    }
-	    set { }
 	}
     }
 }

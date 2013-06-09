@@ -42,7 +42,7 @@ namespace Reminder
 	    EventClass[] temp = array;
 	    Array.Sort(temp, delegate(EventClass a, EventClass b)
 	    {
-		return a.IsOverDated.CompareTo(b.IsOverDated);
+		return -a.IsOverDated.CompareTo(b.IsOverDated);
 	    }
 	    );
 	    return temp;
@@ -53,23 +53,25 @@ namespace Reminder
 	    EventClass[] temp = array;
 	    Array.Sort(temp, delegate(EventClass a, EventClass b)
 	    {
-		return a.Importance.CompareTo(b.Importance);
+		return -a.Importance.CompareTo(b.Importance);
 	    }
 	    );
 	    return temp;
 	}
-	/*
+	
 	public EventClass[] sortByDueDate()
 	{
 	    EventClass[] temp = array;
 	    Array.Sort(temp, delegate(EventClass a, EventClass b)
 	    {
-		Array.Sort
+		Array.Sort(temp,delegate(EventClass c, EventClass d)
+		{
+		    return c.Year.CompareTo(d.Year);
+		});
 		return a.Name.CompareTo(b.Name);
-	    }
-	    );
+	    });
 	    return temp;
-	}*/
+	}	
 
     }
 }
