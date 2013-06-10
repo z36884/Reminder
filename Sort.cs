@@ -21,8 +21,7 @@ namespace Reminder
 	    Array.Sort(temp, delegate(EventClass a, EventClass b)
 	    {
 		return a.Name.CompareTo(b.Name);
-	    }
-	    );
+	    });
 	    return temp;
 	}
 
@@ -32,8 +31,7 @@ namespace Reminder
 	    Array.Sort(temp, delegate(EventClass a, EventClass b)
 	    {
 		return a.IsFinished.CompareTo(b.IsFinished);
-	    }
-	    );
+	    });
 	    return temp;
 	}
 
@@ -43,8 +41,7 @@ namespace Reminder
 	    Array.Sort(temp, delegate(EventClass a, EventClass b)
 	    {
 		return -a.IsOverDated.CompareTo(b.IsOverDated);
-	    }
-	    );
+	    });
 	    return temp;
 	}
 
@@ -54,8 +51,7 @@ namespace Reminder
 	    Array.Sort(temp, delegate(EventClass a, EventClass b)
 	    {
 		return -a.Importance.CompareTo(b.Importance);
-	    }
-	    );
+	    });
 	    return temp;
 	}
 	
@@ -64,11 +60,7 @@ namespace Reminder
 	    EventClass[] temp = array;
 	    Array.Sort(temp, delegate(EventClass a, EventClass b)
 	    {
-		Array.Sort(temp,delegate(EventClass c, EventClass d)
-		{
-		    return c.Year.CompareTo(d.Year);
-		});
-		return a.Name.CompareTo(b.Name);
+		return a.DateNumber.CompareTo(b.DateNumber);
 	    });
 	    return temp;
 	}	
