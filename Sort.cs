@@ -42,6 +42,7 @@ namespace Reminder
 	    {
 		return -a.IsOverDated.CompareTo(b.IsOverDated);
 	    });
+	    
 	    return temp;
 	}
 
@@ -64,6 +65,5 @@ namespace Reminder
 	    });
 	    return temp;
 	}	
-
     }
 }
