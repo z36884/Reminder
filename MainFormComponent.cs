@@ -47,6 +47,13 @@ namespace Reminder
             this.Controls.Add(s);
 
             this.ResumeLayout(false);
+
+	    //List
+	    List list = new List();
+            //list.Size = new Size(300, 60);
+            list.Location = new Point(0, 50);
+            this.Controls.Add(list);
+
         }
 
         // Enable dragging from anywhere
