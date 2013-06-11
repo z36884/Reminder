@@ -31,9 +31,8 @@ namespace Reminder
 
 	    //List
 	    List list = new List();
-            list.Size = new Size(300, 60);
+            //list.Size = new Size(300, 60);
             list.Location = new Point(0, 50);
-            list.BackColor = Color.DimGray;
             this.Controls.Add(list);
 
         }
