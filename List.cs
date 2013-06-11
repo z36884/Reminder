@@ -50,6 +50,27 @@ namespace Reminder
 	    Controler.Visible = false;
 	    this.Controls.Add(Controler);
 
+	    PictureBox check = new PictureBox();
+	    check.Image = Image.FromFile("check.png");
+            check.Location = new Point(10, 5);
+            check.Size = new Size(50, 50);
+	    check.SizeMode = PictureBoxSizeMode.StretchImage;
+	    Controler.Controls.Add(check);
+
+	    PictureBox delete = new PictureBox();
+	    delete.Image = Image.FromFile("delete.png");
+            delete.Location = new Point(70, 5);
+            delete.Size = new Size(50, 50);
+	    delete.SizeMode = PictureBoxSizeMode.StretchImage;
+	    Controler.Controls.Add(delete);
+
+	    PictureBox edit = new PictureBox();
+	    edit.Image = Image.FromFile("edit.png");
+            edit.Location = new Point(130, 5);
+            edit.Size = new Size(50, 50);
+	    edit.SizeMode = PictureBoxSizeMode.StretchImage;
+	    Controler.Controls.Add(edit);
+
 	    Event.Click += new EventHandler(Event_MouseClick);
 	    Controler.Click += new EventHandler(Controler_MouseClick);
 	}
