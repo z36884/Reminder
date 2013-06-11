@@ -29,10 +29,9 @@ namespace Reminder
             mini.Size = new Size(30, 30);
 
             // close
-            PictureBox close = new PictureBox();
-            close.BackColor = Color.PowderBlue;
+            CloseButton close = new CloseButton(20, 20);
             close.Location = new Point(220, 5);
-            close.Size = new Size(30, 30);
+            close.MouseClick += close_MouseClick;
 
             // TitleBar
             this.MouseDown += titleBarMouseDown;
@@ -65,6 +64,11 @@ namespace Reminder
                 YDelta = endPoint.Y - startPoint.Y;
                 this.FindForm().Location = new Point(formStartPoint.X + XDelta, formStartPoint.Y + YDelta);
             }
+        }
+
+        void close_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.FindForm().Close();
         }
     }
 }

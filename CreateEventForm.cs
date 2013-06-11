@@ -43,7 +43,7 @@ namespace Reminder
             picker.Location = new Point(5, 20);
             picker.Name = "picker";
             picker.Format = DateTimePickerFormat.Custom;
-            picker.CustomFormat = "yyyy.MMM.dd   hh:mm";
+            picker.CustomFormat = "yyyy.MMM.dd   H:mm";
             picker.KeyDown += keyDown;
 
             // due group box
@@ -170,7 +170,7 @@ namespace Reminder
 
         public void form_Paint(object sender, PaintEventArgs e)
         {
-            DrawRoundRect(e.Graphics, Pens.Black, e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Width, e.ClipRectangle.Height, 10);
+            DrawRoundRect(e.Graphics, Pens.Black, e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Width, e.ClipRectangle.Height, 5);
         }
     }
 }

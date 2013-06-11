@@ -35,6 +35,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CloseButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CreateEventForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -45,6 +51,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Run.cs" />
+    <Compile Include="Test.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TitleBar.cs">
       <SubType>Component</SubType>
     </Compile>
