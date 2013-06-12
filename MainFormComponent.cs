@@ -40,16 +40,20 @@ namespace Reminder
             this.Controls.Add(adder);
 
 	    //Event
-	    Panel listPanel = new Panel();
-	    listPanel.Size = new Size(300,500);
-	    List<EventClass> ec = EventReader.DeserializeFromXML();
-	    for(int i=0;i<ec.Count;i++)
-	    {
-		Event list = new Event(ec[i]);
-		list.Size = new Size(300, 60);
-		list.Location = new Point(0, i*60+40);
-		listPanel.Controls.Add(list);
-	    }
+            Panel listPanel = new Panel();
+            listPanel.Size = new Size(300, 500);
+            try
+            {
+                List<EventClass> ec = EventReader.DeserializeFromXML();
+                for (int i = 0; i < ec.Count; i++)
+                {
+                    Event list = new Event(ec[i]);
+                    list.Size = new Size(300, 60);
+                    list.Location = new Point(0, i * 60 + 40);
+                    listPanel.Controls.Add(list);
+                }
+            }
+            catch { }
             this.Controls.Add(listPanel);
 
             this.ResumeLayout(false);

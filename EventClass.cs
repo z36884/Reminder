@@ -11,6 +11,7 @@ namespace Reminder
     {
         private string name;
         private DateTime due;
+        private String dueString;
         private int importance;
         private bool isFinished;
         private bool isOverDated;
@@ -25,6 +26,7 @@ namespace Reminder
         {
             this.name = name;
             this.due = due;
+            this.dueString = due.ToString("yyyy.MMM.dd   H:mm");
             this.importance = importance;
             this.isFinished = isFinished;
             this.isOverDated = isOverDated;
@@ -39,7 +41,10 @@ namespace Reminder
         }
 
         public DateTime Due
-        { get; set; }
+        {
+            get { return due; }
+            set { due = value; }
+        }
 
         public int Importance
         {
