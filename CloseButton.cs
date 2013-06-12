@@ -18,9 +18,10 @@ namespace Reminder
 
             this.Image = map;
             this.Size = new Size(width, height);
-            this.BackColor = Color.Violet;
+            this.BackColor = Color.FromArgb(45, 45, 48);
             this.MouseEnter += CloseButton_MouseEnter;
             this.MouseLeave += CloseButton_MouseLeave;
+            this.MouseClick += CloseButton_MouseClick;
         }
 
         void drawCross(int width, int height)
@@ -45,8 +46,13 @@ namespace Reminder
 
         void CloseButton_MouseLeave(object sender, EventArgs e)
         {
-            this.BackColor = Color.Violet;
+            this.BackColor = Color.FromArgb(45, 45, 48);
             Application.DoEvents();
+        }
+
+        void CloseButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.FindForm().Close();
         }
     }
 }

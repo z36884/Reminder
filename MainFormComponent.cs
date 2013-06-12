@@ -27,7 +27,7 @@ namespace Reminder
 
             // adder
             adder = new AddButton(30, 30);
-            adder.Location = new Point(0, 50);
+            adder.Location = new Point(0, 470);
             adder.MouseClick += adder_MouseClick;
           
             // MainForm
@@ -38,22 +38,13 @@ namespace Reminder
             this.Controls.Add(titleBar);
             this.Controls.Add(adder);
 
-            Test t = new Test();
-            t.Location = new Point(0, 200);
-            this.Controls.Add(t);
-
-            Test s = new Test();
-            s.Location = new Point(0, 300);
-            this.Controls.Add(s);
-
-            this.ResumeLayout(false);
-
 	    //List
 	    List list = new List();
-            //list.Size = new Size(300, 60);
+            list.Size = new Size(300, 60);
             list.Location = new Point(0, 50);
             this.Controls.Add(list);
 
+            this.ResumeLayout(false);
         }
 
         // Enable dragging from anywhere

@@ -7,66 +7,77 @@ namespace Reminder
 {
     public class CreateEventForm : Form
     {
+        private const int groupboxWidth = 250;
+
         GroupBox title, due, type, series;
         TextBox nameTextBox;
         DateTimePicker picker;
         ComboBox typeComboBox;
         Button ok, cancel;
-        private const int groupboxWidth = 250;
         bool drag;
         Point startPoint;
         Point formStartPoint;
+        CloseButton closeButton;
 
         public CreateEventForm()
         {
             title = new GroupBox();
             due = new GroupBox();
             type = new GroupBox();
+            closeButton = new CloseButton(20, 20);
+
+            // closeButton
+            closeButton.Location = new Point(260, 10);
 
             // name textbox
             nameTextBox = new TextBox();
-            nameTextBox.Location = new Point(5, 20);
+            nameTextBox.Location = new Point(25, 30);
+            nameTextBox.Size = new Size(200, 10);
+            nameTextBox.Font = new Font(nameTextBox.Font.FontFamily, 12F);
             nameTextBox.Name = "nameTextBox";
             nameTextBox.KeyDown += keyDown;
-
-            // name group box
-            title.Location = new Point(10, 10);
-            title.BackColor = Color.Gray;
-            title.Size = new Size(groupboxWidth, 70);
-            title.Name = "title";
-            title.Text = "Title";
-            title.Font = new Font(title.Font.FontFamily, 20F);
-            title.Controls.Add(nameTextBox);
+            nameTextBox.MaxLength = 20;
 
             // due date time picker
             picker = new DateTimePicker();
-            picker.Location = new Point(5, 20);
+            picker.Location = new Point(25, 30);
+            picker.Font = new Font(picker.Font.FontFamily, 12F);
             picker.Name = "picker";
             picker.Format = DateTimePickerFormat.Custom;
             picker.CustomFormat = "yyyy.MMM.dd   H:mm";
             picker.KeyDown += keyDown;
 
-            // due group box
-            due.Location = new Point(10, 70);
-            due.BackColor = Color.Gray;
-            due.Size = new Size(groupboxWidth, 70);
-            due.Name = "due";
-            due.Text = "Due";
-            due.Font = new Font(due.Font.FontFamily, 20F);
-            due.Controls.Add(picker);
-
             // type combo box
             typeComboBox = new ComboBox();
-            typeComboBox.Location = new Point(5, 20);
+            typeComboBox.Location = new Point(25, 30);
+            typeComboBox.Font = new Font(typeComboBox.Font.FontFamily, 12F);
             typeComboBox.Name = "typeComboBox";
             typeComboBox.Items.Add("Single");
             typeComboBox.Items.Add("Multiple");
             typeComboBox.KeyDown += keyDown;
 
+            // name group box
+            title.Location = new Point(10, 25);
+            title.BackColor = Color.Gray;
+            title.Size = new Size(groupboxWidth, 80);
+            title.Name = "title";
+            title.Text = "Title";
+            title.Font = new Font(title.Font.FontFamily, 20F);
+            title.Controls.Add(nameTextBox);
+
+            // due group box
+            due.Location = new Point(10, 110);
+            due.BackColor = Color.Gray;
+            due.Size = new Size(groupboxWidth, 80);
+            due.Name = "due";
+            due.Text = "Due";
+            due.Font = new Font(due.Font.FontFamily, 20F);
+            due.Controls.Add(picker);
+
             // type group box
-            type.Location = new Point(10, 130);
+            type.Location = new Point(10, 195);
             type.BackColor = Color.Gray;
-            type.Size = new Size(groupboxWidth, 70);
+            type.Size = new Size(groupboxWidth, 80);
             type.Name = "type";
             type.Text = "Type";
             type.Font = new Font(type.Font.FontFamily, 20F);
@@ -81,12 +92,14 @@ namespace Reminder
 
             // CreateEventForm
             this.FormBorderStyle = FormBorderStyle.None;
+            this.Size = new Size(300, 500);
             this.MouseDown += formMouseDown;
             this.MouseUp += formMouseUp;
             this.MouseMove += formMouseMove;
             this.BackColor = Color.Lime;
             this.TransparencyKey = Color.Lime;
             this.Paint += form_Paint;
+            this.Controls.Add(closeButton);
             this.Controls.Add(title);
             this.Controls.Add(due);
             this.Controls.Add(type);

@@ -31,7 +31,6 @@ namespace Reminder
             // close
             CloseButton close = new CloseButton(20, 20);
             close.Location = new Point(220, 5);
-            close.MouseClick += close_MouseClick;
 
             // TitleBar
             this.MouseDown += titleBarMouseDown;
@@ -64,11 +63,6 @@ namespace Reminder
                 YDelta = endPoint.Y - startPoint.Y;
                 this.FindForm().Location = new Point(formStartPoint.X + XDelta, formStartPoint.Y + YDelta);
             }
-        }
-
-        void close_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.FindForm().Close();
         }
     }
 }

@@ -55,9 +55,8 @@
     <Compile Include="MainFormComponent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Run.cs" />
-    <Compile Include="Test.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Run.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Sort.cs" />
     <Compile Include="SortInterface.cs" />
@@ -69,6 +68,8 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
