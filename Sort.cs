@@ -61,7 +61,7 @@ namespace Reminder
 	    EventClass[] temp = array;
 	    Array.Sort(temp, delegate(EventClass a, EventClass b)
 	    {
-		return a.DateNumber.CompareTo(b.DateNumber);
+		return a.Due.CompareTo(b.Due);
 	    });
 	    return temp;
 	}	
