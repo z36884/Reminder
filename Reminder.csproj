@@ -55,11 +55,11 @@
     <Compile Include="MainFormComponent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Run.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Sort.cs" />
     <Compile Include="SortInterface.cs" />
+    <Compile Include="Test.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TitleBar.cs">
       <SubType>Component</SubType>
     </Compile>
