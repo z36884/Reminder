@@ -5,43 +5,46 @@ using System.Drawing;
 
 namespace Reminder
 {
-    class List : Panel
+    class Event : Panel
     {
-	private Panel Event;
+	private Panel eventPanel;
 	private Panel Controler;
+	private EventClass ec;
 
-	public List()
+	public Event(EventClass ec)
 	{
-	    Event = new Panel();
-            Event.BackColor = Color.Blue;
-	    Event.Visible = true;
-	    Event.Size = new Size(300,60);
+	    this.ec = ec;
+
+	    eventPanel = new Panel();
+            eventPanel.BackColor = Color.Blue;
+	    eventPanel.Visible = true;
+	    eventPanel.Size = new Size(300,60);
 
 	    Label name = new Label();
-	    name.Text = "TestName";
+	    name.Text = ec.Name;
 	    name.Location = new Point(0, 0);
 	    name.Size = new Size(300, 40);
 	    name.Font = new Font("Segoe Script", 20F);
 	    name.Click += new EventHandler(Event_MouseClick);
 
 	    Label importance = new Label();
-	    importance.Text = "3";
+	    importance.Text = Convert.ToString(ec.Importance); 
 	    importance.Location = new Point(0, 30);
 	    importance.Size = new Size(50, 40);
 	    importance.Font = new Font("Segoe Script", 16F);
 	    importance.Click += new EventHandler(Event_MouseClick);
 
 	    Label date = new Label();
-	    date.Text = "2013/11/27";
+	    date.Text = Convert.ToString(ec.Due);
 	    date.Location = new Point(60, 30);
 	    date.Size = new Size(300, 40);
 	    date.Font = new Font("Segoe Script", 16F);
 	    date.Click += new EventHandler(Event_MouseClick);
 
-	    Event.Controls.Add(name);
-	    Event.Controls.Add(importance);
-	    Event.Controls.Add(date);
-	    this.Controls.Add(Event);
+	    eventPanel.Controls.Add(name);
+	    eventPanel.Controls.Add(importance);
+	    eventPanel.Controls.Add(date);
+	    this.Controls.Add(eventPanel);
 
 
 	    Controler = new Panel();
@@ -71,19 +74,19 @@ namespace Reminder
 	    edit.SizeMode = PictureBoxSizeMode.StretchImage;
 	    Controler.Controls.Add(edit);
 
-	    Event.Click += new EventHandler(Event_MouseClick);
+	    eventPanel.Click += new EventHandler(Event_MouseClick);
 	    Controler.Click += new EventHandler(Controler_MouseClick);
 	}
 
 	private void Event_MouseClick(object sender, EventArgs e)
 	{
-	    Event.Visible = false;
+	    eventPanel.Visible = false;
 	    Controler.Visible = true;
 	}
 
 	private void Controler_MouseClick(object sender, EventArgs e)
-	{
-	    Event.Visible = true;
+	{       
+	    eventPanel.Visible = true;
 	    Controler.Visible = false;
 	}
     }
