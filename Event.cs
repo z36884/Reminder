@@ -7,87 +7,123 @@ namespace Reminder
 {
     class Event : Panel
     {
-	private Panel eventPanel;
-	private Panel Controler;
-	private EventClass ec;
+        private Panel eventPanel;
+        private Panel controlPanel;
+        private List<EventClass> ec;
+        private int position;
 
-	public Event(EventClass ec)
-	{
-	    this.ec = ec;
+        public Event(List<EventClass> ec, int position)
+        {
+            this.ec = ec;
+            this.position = position;
 
-	    eventPanel = new Panel();
+            eventPanel = new Panel();
             eventPanel.BackColor = Color.Blue;
-	    eventPanel.Visible = true;
-	    eventPanel.Size = new Size(300,60);
+            eventPanel.Visible = true;
+            eventPanel.Size = new Size(300, 60);
 
-	    Label name = new Label();
-	    name.Text = ec.Name;
-	    name.Location = new Point(0, 0);
-	    name.Size = new Size(300, 40);
-	    name.Font = new Font("Segoe Script", 20F);
-	    name.Click += new EventHandler(Event_MouseClick);
+            Label name = new Label();
+            name.Text = ec[position].Name;
+            name.Location = new Point(0, 0);
+            name.Size = new Size(300, 40);
+            name.Font = new Font("Segoe Script", 20F);
+            name.Click += new EventHandler(eventPanel_MouseClick);
 
-	    Label importance = new Label();
-	    importance.Text = Convert.ToString(ec.Importance); 
-	    importance.Location = new Point(0, 30);
-	    importance.Size = new Size(50, 40);
-	    importance.Font = new Font("Segoe Script", 16F);
-	    importance.Click += new EventHandler(Event_MouseClick);
+            Label importance = new Label();
+            importance.Text = Convert.ToString(ec[position].Importance);
+            importance.Location = new Point(0, 30);
+            importance.Size = new Size(50, 40);
+            importance.Font = new Font("Segoe Script", 16F);
+            importance.Click += new EventHandler(eventPanel_MouseClick);
 
-	    Label date = new Label();
-	    date.Text = Convert.ToString(ec.Due);
-	    date.Location = new Point(60, 30);
-	    date.Size = new Size(300, 40);
-	    date.Font = new Font("Segoe Script", 16F);
-	    date.Click += new EventHandler(Event_MouseClick);
+            Label date = new Label();
+            date.Text = ec[position].Due.ToString("yyyy/MMM/dd H:mm");
+            date.Location = new Point(60, 30);
+            date.Size = new Size(300, 40);
+            date.Font = new Font("Segoe Script", 16F);
+            date.Click += new EventHandler(eventPanel_MouseClick);
 
-	    eventPanel.Controls.Add(name);
-	    eventPanel.Controls.Add(importance);
-	    eventPanel.Controls.Add(date);
-	    this.Controls.Add(eventPanel);
+            eventPanel.Controls.Add(name);
+            eventPanel.Controls.Add(importance);
+            eventPanel.Controls.Add(date);
+            this.Controls.Add(eventPanel);
 
+            controlPanel = new Panel();
+            controlPanel.BackColor = Color.Red;
+            controlPanel.Size = new Size(300, 60);
+            controlPanel.Visible = false;
 
-	    Controler = new Panel();
-	    Controler.BackColor = Color.Red;
-	    Controler.Size = new Size(300,60);
-	    Controler.Visible = false;
-	    this.Controls.Add(Controler);
-
-	    PictureBox check = new PictureBox();
-	    check.Image = Image.FromFile("check.png");
+            PictureBox check = new PictureBox();
+            check.Image = Image.FromFile("check.png");
             check.Location = new Point(10, 5);
             check.Size = new Size(50, 50);
-	    check.SizeMode = PictureBoxSizeMode.StretchImage;
-	    Controler.Controls.Add(check);
+            check.SizeMode = PictureBoxSizeMode.StretchImage;
+            check.Click += new EventHandler(check_MouseClick);
 
-	    PictureBox delete = new PictureBox();
-	    delete.Image = Image.FromFile("delete.png");
+            PictureBox delete = new PictureBox();
+            delete.Image = Image.FromFile("delete.png");
             delete.Location = new Point(70, 5);
             delete.Size = new Size(50, 50);
-	    delete.SizeMode = PictureBoxSizeMode.StretchImage;
-	    Controler.Controls.Add(delete);
+            delete.SizeMode = PictureBoxSizeMode.StretchImage;
+            delete.Click += new EventHandler(delete_MouseClick);
 
-	    PictureBox edit = new PictureBox();
-	    edit.Image = Image.FromFile("edit.png");
+            PictureBox edit = new PictureBox();
+            edit.Image = Image.FromFile("edit.png");
             edit.Location = new Point(130, 5);
             edit.Size = new Size(50, 50);
-	    edit.SizeMode = PictureBoxSizeMode.StretchImage;
-	    Controler.Controls.Add(edit);
+            edit.SizeMode = PictureBoxSizeMode.StretchImage;
+            edit.Click += new EventHandler(edit_MouseClick);
 
-	    eventPanel.Click += new EventHandler(Event_MouseClick);
-	    Controler.Click += new EventHandler(Controler_MouseClick);
-	}
+            controlPanel.Controls.Add(check);
+            controlPanel.Controls.Add(delete);
+            controlPanel.Controls.Add(edit);
+            this.Controls.Add(controlPanel);
 
-	private void Event_MouseClick(object sender, EventArgs e)
-	{
-	    eventPanel.Visible = false;
-	    Controler.Visible = true;
-	}
+            eventPanel.Click += new EventHandler(eventPanel_MouseClick);
+            controlPanel.Click += new EventHandler(controlPanel_MouseClick);
+        }
 
-	private void Controler_MouseClick(object sender, EventArgs e)
-	{       
-	    eventPanel.Visible = true;
-	    Controler.Visible = false;
-	}
+        private void eventPanel_MouseClick(object sender, EventArgs e)
+        {
+            eventPanel.Visible = false;
+            controlPanel.Visible = true;
+        }
+
+        private void controlPanel_MouseClick(object sender, EventArgs e)
+        {
+            eventPanel.Visible = true;
+            controlPanel.Visible = false;
+        }
+
+        public void check_MouseClick(object sender, EventArgs e)
+        {
+            ec[position].IsFinished = true;
+            eventPanel.Visible = true;
+            controlPanel.Visible = false;
+        }
+
+        public void delete_MouseClick(object sender, EventArgs e)
+        {
+            ec.RemoveAt(position);
+            EventWriter.SerializeToXML(ec);
+            Control control = this.Parent;
+            control.Controls.Clear();
+            List<EventClass> ec2 = EventReader.DeserializeFromXML();
+            for (int i = 0; i < ec.Count; i++)
+            {
+                Event list = new Event(ec2, i);
+                list.Size = new Size(300, 60);
+                list.Location = new Point(0, i * 60 + 40);
+                control.Controls.Add(list);
+            }
+        }
+
+        public void edit_MouseClick(object sender, EventArgs e)
+        {
+            CreateEventForm form = new CreateEventForm(ec[position]);
+            form.ShowDialog();
+            eventPanel.Visible = true;
+            controlPanel.Visible = false;
+        }
     }
 }

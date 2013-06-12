@@ -21,11 +21,44 @@ namespace Reminder
         Point formStartPoint;
         CloseButton closeButton;
         PictureBox prev, next;
-        Label fraction;
         List<String> events;
         int curNum, totalNum;
 
         public CreateEventForm()
+        {
+            InitializeComponent();
+        }
+
+        public CreateEventForm(EventClass ec)
+        {
+            InitializeComponent();
+            nameTextBox.Text = ec.Name;
+            picker.Value = ec.Due;
+        }
+
+        public TextBox NameTextBox
+        {
+            get
+            {
+                return nameTextBox;
+            }
+        }
+        public DateTimePicker Picker
+        {
+            get
+            {
+                return picker;
+            }
+        }
+        public ComboBox TypeComboBox
+        {
+            get
+            {
+                return typeComboBox;
+            }
+        }
+
+        public void InitializeComponent()
         {
             title = new GroupBox();
             due = new GroupBox();
@@ -75,7 +108,7 @@ namespace Reminder
             due.Text = "Due";
             due.Font = new Font(due.Font.FontFamily, 20F);
             due.Controls.Add(picker);
-            #endregion 
+            #endregion
 
             #region importance
             // importance combo box
@@ -184,28 +217,6 @@ namespace Reminder
             this.Controls.Add(series);
         }
 
-        public TextBox NameTextBox
-        {
-            get
-            {
-                return nameTextBox;
-            }
-        }
-        public DateTimePicker Picker
-        {
-            get
-            {
-                return picker;
-            }
-        }
-        public ComboBox TypeComboBox
-        {
-            get
-            {
-                return typeComboBox;
-            }
-        }
-
         public void keyDown(object senderm, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -268,7 +279,7 @@ namespace Reminder
             switch ((String)typeComboBox.SelectedItem)
             {
                 case "Single":
-                    newEvent = new EventClass(nameTextBox.Text, picker.Value, importanceNum, false, false, false, null);
+                    newEvent = new EventClass(nameTextBox.Text, picker.Value, importanceNum, false, false, null);
                     elist.Add(newEvent);
                     break;
                 case "Multiple":
@@ -276,7 +287,7 @@ namespace Reminder
                     for (int i = 1; i <= totalNum; i++)
                         if (seriesTextBox[i].Text != "")
                             events.Add(seriesTextBox[i].Text);
-                    newEvent = new EventClass(nameTextBox.Text, picker.Value, importanceNum, false, false, true, events);
+                    newEvent = new EventClass(nameTextBox.Text, picker.Value, importanceNum, false, true, events);
                     elist.Add(newEvent);
                     break;
             }

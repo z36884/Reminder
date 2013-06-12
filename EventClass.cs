@@ -22,14 +22,17 @@ namespace Reminder
         {
         }
 
-        public EventClass(string name, DateTime due, int importance, bool isFinished, bool isOverDated, bool isMultiEvent, List<String> eventlist)
+        public EventClass(string name, DateTime due, int importance, bool isFinished, bool isMultiEvent, List<String> eventlist)
         {
             this.name = name;
             this.due = due;
-            this.dueString = due.ToString("yyyy.MMM.dd   H:mm");
+            this.dueString = due.ToString("yyyy/MMM/dd   H:mm");
             this.importance = importance;
             this.isFinished = isFinished;
-            this.isOverDated = isOverDated;
+            if (due <= DateTime.Now)
+                this.isOverDated = true;
+            else
+                this.isOverDated = false;
             this.isMultiEvent = isMultiEvent;
             this.eventlist = eventlist;
         }
