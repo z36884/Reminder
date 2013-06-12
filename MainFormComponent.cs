@@ -17,6 +17,7 @@ namespace Reminder
         TitleBar titleBar;
         PictureBox adder;
         PictureBox sort;
+        PictureBox finish;
 
 	private Panel listPanel;
 	private int sortMethod = 1;
@@ -41,6 +42,11 @@ namespace Reminder
             sort.Location = new Point(50, 470);
             sort.MouseClick += sort_MouseClick;
           
+            // finish 
+            finish = new AddButton(30, 30);
+            finish.Location = new Point(100, 470);
+            finish.MouseClick += finish_MouseClick;
+
             // MainForm
             this.FormBorderStyle = FormBorderStyle.None;
             this.Name = "MainForm";
@@ -49,6 +55,7 @@ namespace Reminder
             this.Controls.Add(titleBar);
             this.Controls.Add(adder);
             this.Controls.Add(sort);
+            this.Controls.Add(finish);
 
 	    //Event
 	    listPanel = new Panel();
@@ -90,12 +97,16 @@ namespace Reminder
 		listPanel.Controls.Clear();
 		List<EventClass> ec2 = EventReader.DeserializeFromXML();
 		ec2.Sort((x,y) => {return x.Due.CompareTo(y.Due);});
+		int b = 0;
 		for(int i=0;i<ec2.Count;i++)
 		{
-		    Event list = new Event(ec2, i);
-		    list.Size = new Size(300, 60);
-		    list.Location = new Point(0, i*60+40);
-		    listPanel.Controls.Add(list);
+		    if(ec2[i].IsFinished != true)
+		    {
+			Event list = new Event(ec2, i);
+			list.Size = new Size(300, 60);
+			list.Location = new Point(0, (b++)*60+40);
+			listPanel.Controls.Add(list);
+		    }
 		}
 	    }
 	    else if(sortMethod == 0)
@@ -104,11 +115,32 @@ namespace Reminder
 		listPanel.Controls.Clear();
 		List<EventClass> ec2 = EventReader.DeserializeFromXML();
 		ec2.Sort((x,y) => {return -x.Importance.CompareTo(y.Importance);});
+		int b = 0;
 		for(int i=0;i<ec2.Count;i++)
+		{
+		    if(ec2[i].IsFinished != true)
+		    {
+			Event list = new Event(ec2, i);
+			list.Size = new Size(300, 60);
+			list.Location = new Point(0, (b++)*60+40);
+			listPanel.Controls.Add(list);
+		    }
+		}
+	    }
+        }
+
+        public void finish_MouseClick(object sender, MouseEventArgs e)
+        {
+	    listPanel.Controls.Clear();
+	    List<EventClass> ec2 = EventReader.DeserializeFromXML();
+	    int b = 0;
+	    for(int i=0;i<ec2.Count;i++)
+	    {
+		if(ec2[i].IsFinished == true)
 		{
 		    Event list = new Event(ec2, i);
 		    list.Size = new Size(300, 60);
-		    list.Location = new Point(0, i*60+40);
+		    list.Location = new Point(0, (b++)*60+40);
 		    listPanel.Controls.Add(list);
 		}
 	    }

@@ -18,7 +18,10 @@ namespace Reminder
 	    this.position = position;
 
 	    eventPanel = new Panel();
-            eventPanel.BackColor = Color.Blue;
+	    if(ec[position].IsOverDated == true)
+		eventPanel.BackColor = Color.Green;
+	    else
+		eventPanel.BackColor = Color.Blue;
 	    eventPanel.Visible = true;
 	    eventPanel.Size = new Size(300,60);
 
@@ -99,8 +102,21 @@ namespace Reminder
 	public void check_MouseClick(object sender, EventArgs e)
 	{
 	    ec[position].IsFinished = true;
-	    eventPanel.Visible = true;
-	    controlPanel.Visible = false;
+	    EventWriter.SerializeToXML(ec);
+	    Control control = this.Parent;
+	    control.Controls.Clear();
+	    List<EventClass> ec2 = EventReader.DeserializeFromXML();
+	    int b = 0;
+	    for(int i=0;i<ec.Count;i++)
+	    {
+		if(ec[i].IsFinished != true)
+		{
+		    Event list = new Event(ec2, i);
+		    list.Size = new Size(300, 60);
+		    list.Location = new Point(0, (b++)*60+40);
+		    control.Controls.Add(list);
+		}
+	    }
 	}
 
 	public void delete_MouseClick(object sender, EventArgs e)
@@ -110,12 +126,16 @@ namespace Reminder
 	    Control control = this.Parent;
 	    control.Controls.Clear();
 	    List<EventClass> ec2 = EventReader.DeserializeFromXML();
+	    int b = 0;
 	    for(int i=0;i<ec.Count;i++)
 	    {
-		Event list = new Event(ec2, i);
-		list.Size = new Size(300, 60);
-		list.Location = new Point(0, i*60+40);
-		control.Controls.Add(list);
+		if(ec[i].IsFinished != true)
+		{
+		    Event list = new Event(ec2, i);
+		    list.Size = new Size(300, 60);
+		    list.Location = new Point(0, (b++)*60+40);
+		    control.Controls.Add(list);
+		}
 	    }
 	}
 
