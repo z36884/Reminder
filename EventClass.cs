@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Reminder
 {
-     class EventClass : EventClassInterface
+    public class EventClass : EventClassInterface
     {
         private string name;
         private DateTime due;
@@ -15,9 +15,13 @@ namespace Reminder
         private bool isFinished;
         private bool isOverDated;
         private bool isMultiEvent;
-        private ArrayList eventlist = new ArrayList();
+        private List<String> eventlist;
 
-        public EventClass(string name, DateTime due, int importance, bool isFinished, bool isOverDated, bool isMultiEvent, ArrayList eventlist)
+        public EventClass()
+        {
+        }
+
+        public EventClass(string name, DateTime due, int importance, bool isFinished, bool isOverDated, bool isMultiEvent, List<String> eventlist)
         {
             this.name = name;
             this.due = due;
@@ -63,9 +67,9 @@ namespace Reminder
             set { isMultiEvent = value; }
         }
 
-        public ArrayList Eventlist
+        public List<String> Eventlist
         {
-            get { return Eventlist; }
+            get { return eventlist; }
         }
 
         public int ArraylistNumber
