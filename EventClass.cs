@@ -11,7 +11,7 @@ namespace Reminder
     {
         private string name;
         private DateTime due;
-	private string dueString;
+        private String dueString;
         private int importance;
         private bool isFinished;
         private bool isOverDated;
@@ -22,18 +22,17 @@ namespace Reminder
         {
         }
 
-        public EventClass(string name, DateTime due, int importance, bool isFinished, bool isOverDated, bool isMultiEvent, List<String> eventlist)
+        public EventClass(string name, DateTime due, int importance, bool isFinished, bool isMultiEvent, List<String> eventlist)
         {
             this.name = name;
             this.due = due;
-	    this.dueString = due.ToString("yyyy/MMM/dd   H:mm");
+            this.dueString = due.ToString("yyyy/MMM/dd   H:mm");
             this.importance = importance;
             this.isFinished = isFinished;
-	    if(due <= DateTime.Now)
-		this.isOverDated = true;
-	    else
-		this.isOverDated = false;
-
+            if (due <= DateTime.Now)
+                this.isOverDated = true;
+            else
+                this.isOverDated = false;
             this.isMultiEvent = isMultiEvent;
             this.eventlist = eventlist;
         }
@@ -45,7 +44,10 @@ namespace Reminder
         }
 
         public DateTime Due
-        { get; set; }
+        {
+            get { return due; }
+            set { due = value; }
+        }
 
         public int Importance
         {
