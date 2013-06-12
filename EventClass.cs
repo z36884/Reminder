@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Reminder
 {
-    class EventClass : EventClassInterface
+     class EventClass : EventClassInterface
     {
         private string name;
         private DateTime due;
