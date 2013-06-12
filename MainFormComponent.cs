@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Reminder
 {
+
     public partial class MainForm
     {
         private const int WM_NCHITTEST = 0x84;
@@ -15,6 +16,10 @@ namespace Reminder
 
         TitleBar titleBar;
         PictureBox adder;
+        PictureBox sort;
+
+	private Panel listPanel;
+	private int sortMethod = 1;
 
         private void InitializeComponent()
         {
@@ -30,6 +35,11 @@ namespace Reminder
             adder = new AddButton(30, 30);
             adder.Location = new Point(0, 470);
             adder.MouseClick += adder_MouseClick;
+
+            // sort 
+            sort = new AddButton(30, 30);
+            sort.Location = new Point(50, 470);
+            sort.MouseClick += sort_MouseClick;
           
             // MainForm
             this.FormBorderStyle = FormBorderStyle.None;
@@ -38,21 +48,21 @@ namespace Reminder
             this.BackColor = Color.FromArgb(45, 45, 48);
             this.Controls.Add(titleBar);
             this.Controls.Add(adder);
+            this.Controls.Add(sort);
 
 	    //Event
-	    Panel listPanel = new Panel();
+	    listPanel = new Panel();
 	    listPanel.Size = new Size(300,500);
 	    List<EventClass> ec = EventReader.DeserializeFromXML();
 	    for(int i=0;i<ec.Count;i++)
 	    {
-		Event list = new Event(ec[i]);
+		Event list = new Event(ec, i);
 		list.Size = new Size(300, 60);
 		list.Location = new Point(0, i*60+40);
 		listPanel.Controls.Add(list);
 	    }
-        listPanel.AutoScroll = true;
+	    listPanel.AutoScroll = true;
             this.Controls.Add(listPanel);
-
 
             this.ResumeLayout(false);
         }
@@ -70,6 +80,38 @@ namespace Reminder
         {
             CreateEventForm form = new CreateEventForm();
             form.ShowDialog();
+        }
+
+        public void sort_MouseClick(object sender, MouseEventArgs e)
+        {
+	    if(sortMethod == 1)
+	    {
+		sortMethod = 0;
+		listPanel.Controls.Clear();
+		List<EventClass> ec2 = EventReader.DeserializeFromXML();
+		ec2.Sort((x,y) => {return x.Due.CompareTo(y.Due);});
+		for(int i=0;i<ec2.Count;i++)
+		{
+		    Event list = new Event(ec2, i);
+		    list.Size = new Size(300, 60);
+		    list.Location = new Point(0, i*60+40);
+		    listPanel.Controls.Add(list);
+		}
+	    }
+	    else if(sortMethod == 0)
+	    {
+		sortMethod = 1;
+		listPanel.Controls.Clear();
+		List<EventClass> ec2 = EventReader.DeserializeFromXML();
+		ec2.Sort((x,y) => {return -x.Importance.CompareTo(y.Importance);});
+		for(int i=0;i<ec2.Count;i++)
+		{
+		    Event list = new Event(ec2, i);
+		    list.Size = new Size(300, 60);
+		    list.Location = new Point(0, i*60+40);
+		    listPanel.Controls.Add(list);
+		}
+	    }
         }
     }
 }
