@@ -9,8 +9,6 @@ namespace Reminder
         {
             MainForm form = new MainForm();
             Application.Run(form);
-
-	
         }
     }
 }
