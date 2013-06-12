@@ -35,6 +35,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CloseButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CreateEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EventClass.cs" />
     <Compile Include="EventClassInterface.cs" />
     <Compile Include="List.cs">
@@ -46,7 +55,9 @@
     <Compile Include="MainFormComponent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Run.cs" />
+    <Compile Include="Run.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Sort.cs" />
     <Compile Include="SortInterface.cs" />
     <Compile Include="TitleBar.cs">
@@ -57,6 +68,8 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">

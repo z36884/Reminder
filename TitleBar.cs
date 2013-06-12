@@ -29,10 +29,8 @@ namespace Reminder
             mini.Size = new Size(30, 30);
 
             // close
-            PictureBox close = new PictureBox();
-            close.BackColor = Color.PowderBlue;
+            CloseButton close = new CloseButton(20, 20);
             close.Location = new Point(220, 5);
-            close.Size = new Size(30, 30);
 
             // TitleBar
             this.MouseDown += titleBarMouseDown;
