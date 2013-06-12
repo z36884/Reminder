@@ -23,10 +23,10 @@ namespace Reminder
             title.MouseMove += titleBarMouseMove;
 
             // minimize
-            PictureBox mini = new PictureBox();
-            mini.BackColor = Color.Red;
-            mini.Location = new Point(180, 5);
-            mini.Size = new Size(30, 30);
+	    PictureBox mini = new PictureBox();
+	    mini.BackColor = Color.Red;
+	    mini.Location = new Point(180,5);
+	    mini.Size = new Size(30,30);
 
             // close
             CloseButton close = new CloseButton(20, 20);
