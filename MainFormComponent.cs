@@ -50,7 +50,9 @@ namespace Reminder
 		list.Location = new Point(0, i*60+40);
 		listPanel.Controls.Add(list);
 	    }
+        listPanel.AutoScroll = true;
             this.Controls.Add(listPanel);
+
 
             this.ResumeLayout(false);
         }
