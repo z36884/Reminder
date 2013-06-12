@@ -34,6 +34,22 @@ namespace Reminder
             InitializeComponent();
             nameTextBox.Text = ec.Name;
             picker.Value = ec.Due;
+            if (ec.IsMultiEvent == true)
+                typeComboBox.SelectedIndex = 1;
+            else
+                typeComboBox.SelectedIndex = 0;
+            switch (ec.Importance)
+            {
+                case 0:
+                    importanceComboBox.SelectedIndex = 0;
+                    break;
+                case 1:
+                    importanceComboBox.SelectedIndex = 1;
+                    break;
+                case 2:
+                    importanceComboBox.SelectedIndex = 2;
+                    break;
+            }
         }
 
         public TextBox NameTextBox
@@ -302,7 +318,7 @@ namespace Reminder
                 case "Single":
                     series.Visible = false;
                     this.Size = new Size(270, 470);
-                    ok.Location = new Point(10, 280);
+                    ok.Location = new Point(10, 365);
                     Application.DoEvents();
                     break;
                 case "Multiple":

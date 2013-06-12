@@ -121,7 +121,20 @@ namespace Reminder
         public void edit_MouseClick(object sender, EventArgs e)
         {
             CreateEventForm form = new CreateEventForm(ec[position]);
+            ec.RemoveAt(position);
+            EventWriter.SerializeToXML(ec);
             form.ShowDialog();
+            Control control = this.Parent;
+            control.Controls.Clear();
+            List<EventClass> ec2 = EventReader.DeserializeFromXML();
+            Console.WriteLine(ec2.Count);
+            for (int i = 0; i < ec2.Count; i++)
+            {
+                Event list = new Event(ec2, i);
+                list.Size = new Size(300, 60);
+                list.Location = new Point(0, i * 60 + 40);
+                control.Controls.Add(list);
+            }
             eventPanel.Visible = true;
             controlPanel.Visible = false;
         }
