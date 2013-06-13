@@ -15,6 +15,7 @@ namespace Reminder
         private Label subtitle;
         private Label date;
         private Label importance;
+	private string str;
 
         public Event(List<EventClass> ec, int position)
         {
@@ -227,7 +228,13 @@ namespace Reminder
             eventPanel.Visible = true;
 
             importance = new Label();
-            importance.Text = Convert.ToString(ec[position].Importance);
+	    switch(ec[position].Importance)
+	    {
+		case 1: str = "!"; break;
+		case 2: str = "!!"; break;
+		case 3: str = "!!!"; break;
+	    }
+            importance.Text = str;
             importance.Size = new Size(50, 40);
             importance.Font = new Font("微軟正黑體", 13F);
             importance.Click += new EventHandler(eventPanel_MouseClick);
