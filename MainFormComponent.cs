@@ -31,6 +31,7 @@ namespace Reminder
 
 	    // adder
 	    adder = new AddButton(30, 30);
+	    adder.Image = Image.FromFile("adder.png");
 	    adder.Location = new Point(0, 470);
 	    adder.MouseClick += adder_MouseClick;
 
@@ -46,7 +47,7 @@ namespace Reminder
 	    finish.Location = new Point(100, 470);
 	    finish.MouseClick += finish_MouseClick;
 
-	    sort.SizeMode = finish.SizeMode =  PictureBoxSizeMode.StretchImage;
+	    adder.SizeMode = sort.SizeMode = finish.SizeMode =  PictureBoxSizeMode.StretchImage;
 
 	    // MainForm
 	    this.FormBorderStyle = FormBorderStyle.None;
