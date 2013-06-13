@@ -47,10 +47,10 @@ namespace Reminder
                 for (int i = 1; i <= ec.Eventlist.Count; i++)
                 {
                     String aEvent = ec.Eventlist[i-1];
-                    Console.WriteLine(aEvent);
                     seriesTextBox[i] = new TextBox();
                     seriesTextBox[i].Text = aEvent;
-                    seriesTextBox[i].Location = new Point(25, 30);
+                    seriesTextBox[i].Location = new Point(35, 35);
+                    seriesTextBox[i].Size = new Size(180, 10);
                     seriesTextBox[i].KeyUp += seriesTextBox_KeyUp;
                     series.Controls.Add(seriesTextBox[i]);
                     if (i != 1)
@@ -76,6 +76,7 @@ namespace Reminder
                     break;
             }
             ok.Text = "Edit";
+            closeButton.Visible = false;
         }
 
         public void InitializeComponent()
@@ -180,7 +181,7 @@ namespace Reminder
             #region button
             // button
             ok = new Button();
-            ok.BackColor = Color.Red;
+            ok.BackColor = Color.DimGray;
             ok.Location = new Point(10, 380);
             ok.Size = new Size(groupboxWidth, 60);
             ok.FlatStyle = FlatStyle.Flat;
@@ -253,6 +254,7 @@ namespace Reminder
                 case Keys.Escape:
                     if (isEdit)
                     {
+                        Console.WriteLine("!");
                         List<EventClass> elist = new List<EventClass>();
                         try
                         {

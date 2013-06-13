@@ -62,12 +62,12 @@ namespace Reminder
                     if (ec2[i].IsMultiEvent == false)
                     {
                         list.Size = new Size(300 - 2, 60);
-                        list.Location = new Point(0, (b++) * 60 + c * 90 + b + c - 1);
+                        list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                     }
                     else
                     {
-                        list.Size = new Size(300 - 2, 90);
-                        list.Location = new Point(0, b * 60 + (c++) * 90 + b + c - 1);
+                        list.Size = new Size(300 - 2, 85);
+                        list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                     }
                     control.Controls.Add(list);
                 }
@@ -95,12 +95,12 @@ namespace Reminder
                         if (ec2[i].IsMultiEvent == false)
                         {
                             list.Size = new Size(300 - 2, 60);
-                            list.Location = new Point(0, (b++) * 60 + c * 90 + b + c - 1);
+                            list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                         }
                         else
                         {
-                            list.Size = new Size(300 - 2, 90);
-                            list.Location = new Point(0, b * 60 + (c++) * 90 + b + c - 1);
+                            list.Size = new Size(300 - 2, 85);
+                            list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                         }
                         control.Controls.Add(list);
                     }
@@ -131,12 +131,12 @@ namespace Reminder
                     if (ec2[i].IsMultiEvent == false)
                     {
                         list.Size = new Size(300 - 2, 60);
-                        list.Location = new Point(0, (b++) * 60 + c * 90 + b + c - 1);
+                        list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                     }
                     else
                     {
-                        list.Size = new Size(300 - 2, 90);
-                        list.Location = new Point(0, b * 60 + (c++) * 90 + b + c - 1);
+                        list.Size = new Size(300 - 2, 85);
+                        list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                     }
                     control.Controls.Add(list);
                 }
@@ -162,12 +162,12 @@ namespace Reminder
                     if (ec2[i].IsMultiEvent == false)
                     {
                         list.Size = new Size(300 - 2, 60);
-                        list.Location = new Point(0, (b++) * 60 + c * 90 + b + c - 1);
+                        list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                     }
                     else
                     {
-                        list.Size = new Size(300 - 2, 90);
-                        list.Location = new Point(0, b * 60 + (c++) * 90 + b + c - 1);
+                        list.Size = new Size(300 - 2, 85);
+                        list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                     }
                     control.Controls.Add(list);
                 }
@@ -181,7 +181,7 @@ namespace Reminder
             setText();
             eventPanel.Size = new Size(300 - 2, 60);
             importance.Location = new Point(0, 30);
-            date.Location = new Point(130, 30);
+            date.Location = new Point(110, 30);
 
             name = new Label();
             name.Text = ec[position].Name;
@@ -198,21 +198,21 @@ namespace Reminder
 
             name = new Label();
             name.Text = ec[position].Name;
-            name.Size = new Size(300 - 2, 40);
+            name.Size = new Size(300 - 2, 30);
             name.Font = new Font("微軟正黑體", 14F);
             name.Click += new EventHandler(eventPanel_MouseClick);
 
             subtitle = new Label();
             subtitle.Text = ec[position].Eventlist[0];
-            subtitle.Size = new Size(200, 40);
+            subtitle.Size = new Size(200, 30);
             subtitle.Font = new Font("微軟正黑體", 13F);
             subtitle.Click += new EventHandler(eventPanel_MouseClick);
 
-            eventPanel.Size = new Size(300 - 2, 90);
-            subtitle.Location = new Point(0, 0);
-            name.Location = new Point(0, 30);
+            eventPanel.Size = new Size(300 - 2, 85);
+            subtitle.Location = new Point(20, 30);
+            name.Location = new Point(0, 0);
             importance.Location = new Point(0, 55);
-            date.Location = new Point(130, 55);
+            date.Location = new Point(110, 55);
 
             eventPanel.Controls.Add(name);
             eventPanel.Controls.Add(subtitle);
@@ -222,20 +222,20 @@ namespace Reminder
         {
             eventPanel = new Panel();
             if (ec[position].Due < DateTime.Now)
-                eventPanel.BackColor = Color.DimGray;
+                eventPanel.BackColor = Color.Crimson;
             else
-                eventPanel.BackColor = Color.Green;
+                eventPanel.BackColor = Color.DimGray;
             eventPanel.Visible = true;
 
             importance = new Label();
 	    switch(ec[position].Importance)
 	    {
-		case 1: str = "!"; break;
-		case 2: str = "!!"; break;
-		case 3: str = "!!!"; break;
+		case 0: str = "!"; break;
+		case 1: str = "!!"; break;
+		case 2: str = "!!!"; break;
 	    }
             importance.Text = str;
-            importance.Size = new Size(50, 40);
+            importance.Size = new Size(30, 40);
             importance.Font = new Font("微軟正黑體", 13F);
             importance.Click += new EventHandler(eventPanel_MouseClick);
 
@@ -257,7 +257,7 @@ namespace Reminder
             if (ec[position].IsMultiEvent == false)
                 controlPanel.Size = new Size(300 - 2, 60);
             else
-                controlPanel.Size = new Size(300 - 2, 90);
+                controlPanel.Size = new Size(300 - 2, 85);
             controlPanel.Visible = false;
 
             PictureBox check = new PictureBox();

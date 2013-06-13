@@ -17,6 +17,7 @@ namespace Reminder
         PictureBox finish;
 
         private Panel listPanel;
+        private System.Windows.Forms.Timer timer;
         private int sortMethod = 1;
 
         private void InitializeComponent()
@@ -70,12 +71,12 @@ namespace Reminder
                         if (ec[i].IsMultiEvent == false)
                         {
                             list.Size = new Size(300 - 2, 60);
-                            list.Location = new Point(0, (b++) * 60 + c * 90 + b + c - 1);
+                            list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                         }
                         else
                         {
-                            list.Size = new Size(300 - 2, 90);
-                            list.Location = new Point(0, b * 60 + (c++) * 90 + b + c - 1);
+                            list.Size = new Size(300 - 2, 85);
+                            list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                         }
                         listPanel.Controls.Add(list);
                     }
@@ -94,6 +95,14 @@ namespace Reminder
             this.Controls.Add(sort);
             this.Controls.Add(finish);
             this.Controls.Add(listPanel);
+
+            Sort();
+
+            // timer
+            timer = new Timer();
+            timer.Interval = 30000;
+            timer.Enabled = true;
+            timer.Tick += timer_Tick;
 
             this.ResumeLayout(false);
         }
@@ -124,13 +133,13 @@ namespace Reminder
                     Event list = new Event(ec2, i);
                     if (ec2[i].IsMultiEvent == false)
                     {
-                        list.Size = new Size(300, 60);
-                        list.Location = new Point(0, (b++) * 60 + c * 90 + b + c - 1);
+                        list.Size = new Size(300 - 2, 60);
+                        list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                     }
                     else
                     {
-                        list.Size = new Size(300, 90);
-                        list.Location = new Point(0, b * 60 + (c++) * 90 + b + c - 1);
+                        list.Size = new Size(300 - 2, 85);
+                        list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                     }
                     listPanel.Controls.Add(list);
                 }
@@ -155,12 +164,12 @@ namespace Reminder
                         if (ec2[i].IsMultiEvent == false)
                         {
                             list.Size = new Size(300 - 2, 60);
-                            list.Location = new Point(0, (b++) * 60 + c * 90 + b + c - 1);
+                            list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                         }
                         else
                         {
-                            list.Size = new Size(300 - 2, 90);
-                            list.Location = new Point(0, b * 60 + (c++) * 90 + b + c - 1);
+                            list.Size = new Size(300 - 2, 85);
+                            list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                         }
                         listPanel.Controls.Add(list);
                     }
@@ -182,17 +191,23 @@ namespace Reminder
                         if (ec2[i].IsMultiEvent == false)
                         {
                             list.Size = new Size(300 - 2, 60);
-                            list.Location = new Point(0, (b++) * 60 + c * 90 + b + c - 1);
+                            list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                         }
                         else
                         {
-                            list.Size = new Size(300 - 2, 90);
-                            list.Location = new Point(0, b * 60 + (c++) * 90 + b + c - 1);
+                            list.Size = new Size(300 - 2, 85);
+                            list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                         }
                         listPanel.Controls.Add(list);
                     }
                 }
             }
+        }
+
+        public void timer_Tick(object sender, EventArgs e)
+        {
+            sortMethod = sortMethod == 1 ? 0 : 1;
+            Sort();
         }
     }
 }
