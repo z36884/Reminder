@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace Reminder
 {
-    class Event : Panel
+    public class Event : Panel
     {
         private Panel eventPanel;
         private Panel controlPanel;

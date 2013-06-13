@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Reminder
 {
-    public class EventClass : EventClassInterface
+    public class EventClass
     {
         private string name;
         private DateTime due;

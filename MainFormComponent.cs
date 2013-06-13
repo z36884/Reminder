@@ -123,85 +123,93 @@ namespace Reminder
         public void finish_MouseClick(object sender, MouseEventArgs e)
         {
             listPanel.Controls.Clear();
-            List<EventClass> ec2 = EventReader.DeserializeFromXML();
-            int b = 0;
-            int c = 0;
-            for (int i = 0; i < ec2.Count; i++)
+            try
             {
-                if (ec2[i].IsFinished == true)
+                List<EventClass> ec2 = EventReader.DeserializeFromXML();
+                int b = 0;
+                int c = 0;
+                for (int i = 0; i < ec2.Count; i++)
                 {
-                    Event list = new Event(ec2, i);
-                    if (ec2[i].IsMultiEvent == false)
+                    if (ec2[i].IsFinished == true)
                     {
-                        list.Size = new Size(300 - 2, 60);
-                        list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
+                        Event list = new Event(ec2, i);
+                        if (ec2[i].IsMultiEvent == false)
+                        {
+                            list.Size = new Size(300 - 2, 60);
+                            list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
+                        }
+                        else
+                        {
+                            list.Size = new Size(300 - 2, 85);
+                            list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
+                        }
+                        listPanel.Controls.Add(list);
                     }
-                    else
-                    {
-                        list.Size = new Size(300 - 2, 85);
-                        list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
-                    }
-                    listPanel.Controls.Add(list);
                 }
             }
+            catch { }
         }
 
         public void Sort()
         {
-            if (sortMethod == 1)
+            try
             {
-                sortMethod = 0;
-                listPanel.Controls.Clear();
-                List<EventClass> ec2 = EventReader.DeserializeFromXML();
-                ec2.Sort((x, y) => { return x.Due.CompareTo(y.Due); });
-                int b = 0;
-                int c = 0;
-                for (int i = 0; i < ec2.Count; i++)
+                if (sortMethod == 1)
                 {
-                    if (ec2[i].IsFinished != true)
+                    sortMethod = 0;
+                    listPanel.Controls.Clear();
+                    List<EventClass> ec2 = EventReader.DeserializeFromXML();
+                    ec2.Sort((x, y) => { return x.Due.CompareTo(y.Due); });
+                    int b = 0;
+                    int c = 0;
+                    for (int i = 0; i < ec2.Count; i++)
                     {
-                        Event list = new Event(ec2, i);
-                        if (ec2[i].IsMultiEvent == false)
+                        if (ec2[i].IsFinished != true)
                         {
-                            list.Size = new Size(300 - 2, 60);
-                            list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
+                            Event list = new Event(ec2, i);
+                            if (ec2[i].IsMultiEvent == false)
+                            {
+                                list.Size = new Size(300 - 2, 60);
+                                list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
+                            }
+                            else
+                            {
+                                list.Size = new Size(300 - 2, 85);
+                                list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
+                            }
+                            listPanel.Controls.Add(list);
                         }
-                        else
+                    }
+                }
+                else if (sortMethod == 0)
+                {
+                    sortMethod = 1;
+                    listPanel.Controls.Clear();
+                    List<EventClass> ec2 = EventReader.DeserializeFromXML();
+                    ec2.Sort((x, y) => { return -x.Importance.CompareTo(y.Importance); });
+                    int b = 0;
+                    int c = 0;
+                    for (int i = 0; i < ec2.Count; i++)
+                    {
+                        if (ec2[i].IsFinished != true)
                         {
-                            list.Size = new Size(300 - 2, 85);
-                            list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
+                            Event list = new Event(ec2, i);
+                            if (ec2[i].IsMultiEvent == false)
+                            {
+                                list.Size = new Size(300 - 2, 60);
+                                list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
+                            }
+                            else
+                            {
+                                list.Size = new Size(300 - 2, 85);
+                                list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
+                            }
+                            listPanel.Controls.Add(list);
                         }
-                        listPanel.Controls.Add(list);
                     }
                 }
             }
-            else if (sortMethod == 0)
-            {
-                sortMethod = 1;
-                listPanel.Controls.Clear();
-                List<EventClass> ec2 = EventReader.DeserializeFromXML();
-                ec2.Sort((x, y) => { return -x.Importance.CompareTo(y.Importance); });
-                int b = 0;
-                int c = 0;
-                for (int i = 0; i < ec2.Count; i++)
-                {
-                    if (ec2[i].IsFinished != true)
-                    {
-                        Event list = new Event(ec2, i);
-                        if (ec2[i].IsMultiEvent == false)
-                        {
-                            list.Size = new Size(300 - 2, 60);
-                            list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
-                        }
-                        else
-                        {
-                            list.Size = new Size(300 - 2, 85);
-                            list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
-                        }
-                        listPanel.Controls.Add(list);
-                    }
-                }
-            }
+            catch { }
         }
 
         public void timer_Tick(object sender, EventArgs e)

@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Reminder
 {
-    class EventWriter
+    public class EventWriter
     {
         public static void SerializeToXML(List<EventClass> e)
         {
