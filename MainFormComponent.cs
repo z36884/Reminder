@@ -36,13 +36,17 @@ namespace Reminder
 
 	    // sort 
 	    sort = new AddButton(30, 30);
+	    sort.Image = Image.FromFile("sort.png");
 	    sort.Location = new Point(50, 470);
 	    sort.MouseClick += sort_MouseClick;
 
 	    // finish 
 	    finish = new AddButton(30, 30);
+	    finish.Image = Image.FromFile("finish.png");
 	    finish.Location = new Point(100, 470);
 	    finish.MouseClick += finish_MouseClick;
+
+	    sort.SizeMode = finish.SizeMode =  PictureBoxSizeMode.StretchImage;
 
 	    // MainForm
 	    this.FormBorderStyle = FormBorderStyle.None;
