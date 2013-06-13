@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace Reminder
 {
-    class Event : Panel
+    public class Event : Panel
     {
         private Panel eventPanel;
         private Panel controlPanel;
@@ -61,13 +61,13 @@ namespace Reminder
                     Event list = new Event(ec2, i);
                     if (ec2[i].IsMultiEvent == false)
                     {
-                        list.Size = new Size(300, 60);
-                        list.Location = new Point(0, (b++) * 60 + c * 90);
+                        list.Size = new Size(300 - 2, 60);
+                        list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                     }
                     else
                     {
-                        list.Size = new Size(300, 90);
-                        list.Location = new Point(0, b * 60 + (c++) * 90);
+                        list.Size = new Size(300 - 2, 85);
+                        list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                     }
                     control.Controls.Add(list);
                 }
@@ -94,13 +94,13 @@ namespace Reminder
                         Event list = new Event(ec2, i);
                         if (ec2[i].IsMultiEvent == false)
                         {
-                            list.Size = new Size(300, 60);
-                            list.Location = new Point(0, (b++) * 60 + c * 90);
+                            list.Size = new Size(300 - 2, 60);
+                            list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                         }
                         else
                         {
-                            list.Size = new Size(300, 90);
-                            list.Location = new Point(0, b * 60 + (c++) * 90);
+                            list.Size = new Size(300 - 2, 85);
+                            list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                         }
                         control.Controls.Add(list);
                     }
@@ -130,13 +130,13 @@ namespace Reminder
                     Event list = new Event(ec2, i);
                     if (ec2[i].IsMultiEvent == false)
                     {
-                        list.Size = new Size(300, 60);
-                        list.Location = new Point(0, (b++) * 60 + c * 90);
+                        list.Size = new Size(300 - 2, 60);
+                        list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
                     }
                     else
                     {
-                        list.Size = new Size(300, 90);
-                        list.Location = new Point(0, b * 60 + (c++) * 90);
+                        list.Size = new Size(300 - 2, 85);
+                        list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
                     }
                     control.Controls.Add(list);
                 }
@@ -152,16 +152,23 @@ namespace Reminder
             Control control = this.Parent;
             control.Controls.Clear();
             List<EventClass> ec2 = EventReader.DeserializeFromXML();
-            Console.WriteLine(ec2.Count);
             int b = 0;
+            int c = 0;
             for (int i = 0; i < ec2.Count; i++)
             {
                 if (ec2[i].IsFinished != true)
                 {
                     Event list = new Event(ec2, i);
-                    list.Size = new Size(300 - 2, 60);
-                    list.Location = new Point(0, b * 60 + b);
-                    b++;
+                    if (ec2[i].IsMultiEvent == false)
+                    {
+                        list.Size = new Size(300 - 2, 60);
+                        list.Location = new Point(0, (b++) * 60 + c * 85 + b + c - 1);
+                    }
+                    else
+                    {
+                        list.Size = new Size(300 - 2, 85);
+                        list.Location = new Point(0, b * 60 + (c++) * 85 + b + c - 1);
+                    }
                     control.Controls.Add(list);
                 }
             }
@@ -172,15 +179,15 @@ namespace Reminder
         public void setSingleEvent()
         {
             setText();
-            eventPanel.Size = new Size(300, 60);
+            eventPanel.Size = new Size(300 - 2, 60);
             importance.Location = new Point(0, 30);
-            date.Location = new Point(60, 30);
+            date.Location = new Point(110, 30);
 
             name = new Label();
             name.Text = ec[position].Name;
             name.Location = new Point(0, 0);
-            name.Size = new Size(300, 40);
-            name.Font = new Font("Segoe Script", 20F);
+            name.Size = new Size(300 - 2, 40);
+            name.Font = new Font("微軟正黑體", 14F);
             name.Click += new EventHandler(eventPanel_MouseClick);
             eventPanel.Controls.Add(name);
         }
@@ -191,21 +198,21 @@ namespace Reminder
 
             name = new Label();
             name.Text = ec[position].Name;
-            name.Size = new Size(100, 40);
-            name.Font = new Font("Segoe Script", 16F);
+            name.Size = new Size(300 - 2, 30);
+            name.Font = new Font("微軟正黑體", 14F);
             name.Click += new EventHandler(eventPanel_MouseClick);
 
             subtitle = new Label();
             subtitle.Text = ec[position].Eventlist[0];
-            subtitle.Size = new Size(100, 40);
-            subtitle.Font = new Font("Segoe Script", 20F);
+            subtitle.Size = new Size(200, 30);
+            subtitle.Font = new Font("微軟正黑體", 13F);
             subtitle.Click += new EventHandler(eventPanel_MouseClick);
 
-            eventPanel.Size = new Size(300, 90);
-            subtitle.Location = new Point(0, 0);
-            name.Location = new Point(0, 30);
+            eventPanel.Size = new Size(300 - 2, 85);
+            subtitle.Location = new Point(20, 30);
+            name.Location = new Point(0, 0);
             importance.Location = new Point(0, 55);
-            date.Location = new Point(60, 55);
+            date.Location = new Point(110, 55);
 
             eventPanel.Controls.Add(name);
             eventPanel.Controls.Add(subtitle);
@@ -215,27 +222,27 @@ namespace Reminder
         {
             eventPanel = new Panel();
             if (ec[position].Due < DateTime.Now)
-                eventPanel.BackColor = Color.DimGray;
+                eventPanel.BackColor = Color.Crimson;
             else
-                eventPanel.BackColor = Color.Green;
+                eventPanel.BackColor = Color.DimGray;
             eventPanel.Visible = true;
 
             importance = new Label();
 	    switch(ec[position].Importance)
 	    {
-		case 1: str = "!"; break;
-		case 2: str = "!!"; break;
-		case 3: str = "!!!"; break;
+		case 0: str = "!"; break;
+		case 1: str = "!!"; break;
+		case 2: str = "!!!"; break;
 	    }
             importance.Text = str;
-            importance.Size = new Size(50, 40);
-            importance.Font = new Font("Segoe Script", 16F);
+            importance.Size = new Size(30, 40);
+            importance.Font = new Font("微軟正黑體", 13F);
             importance.Click += new EventHandler(eventPanel_MouseClick);
 
             date = new Label();
             date.Text = ec[position].Due.ToString("yyyy/MMM/dd H:mm");
-            date.Size = new Size(300, 40);
-            date.Font = new Font("Segoe Script", 16F);
+            date.Size = new Size(300 - 2, 40);
+            date.Font = new Font("微軟正黑體", 13F);
             date.Click += new EventHandler(eventPanel_MouseClick);
 
             eventPanel.Controls.Add(importance);
@@ -246,11 +253,11 @@ namespace Reminder
         public void setControlPanel()
         {
             controlPanel = new Panel();
-            controlPanel.BackColor = Color.Red;
+            controlPanel.BackColor = Color.DimGray;
             if (ec[position].IsMultiEvent == false)
-                controlPanel.Size = new Size(300, 60);
+                controlPanel.Size = new Size(300 - 2, 60);
             else
-                controlPanel.Size = new Size(300, 90);
+                controlPanel.Size = new Size(300 - 2, 85);
             controlPanel.Visible = false;
 
             PictureBox check = new PictureBox();

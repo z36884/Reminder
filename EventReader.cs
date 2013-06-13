@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Reminder
 {
-    class EventReader
+    public class EventReader
     {
         public static List<EventClass> DeserializeFromXML()
         {

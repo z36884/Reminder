@@ -22,12 +22,6 @@ namespace Reminder
             title.MouseUp += titleBarMouseUp;
             title.MouseMove += titleBarMouseMove;
 
-            // minimize
-	    PictureBox mini = new PictureBox();
-	    mini.BackColor = Color.Red;
-	    mini.Location = new Point(180,5);
-	    mini.Size = new Size(30,30);
-
             // close
             CloseButton close = new CloseButton(20, 20);
             close.Location = new Point(268, 10);
@@ -37,7 +31,6 @@ namespace Reminder
             this.MouseUp += titleBarMouseUp;
             this.MouseMove += titleBarMouseMove;
             this.Controls.Add(title);
-            this.Controls.Add(mini);
             this.Controls.Add(close);
         }
 
