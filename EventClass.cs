@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Reminder
 {
@@ -78,6 +79,7 @@ namespace Reminder
         public List<String> Eventlist
         {
             get { return eventlist; }
+            set { eventlist = value; }
         }
 
         public int ArraylistNumber

@@ -18,32 +18,32 @@ namespace Reminder
             this.position = position;
 
             eventPanel = new Panel();
-	    if(ec[position].Due<DateTime.Now)
-		eventPanel.BackColor = Color.Blue;
-	    else
-		eventPanel.BackColor = Color.Green;
+            if (ec[position].Due < DateTime.Now)
+                eventPanel.BackColor = Color.DimGray;
+            else
+                eventPanel.BackColor = Color.Green;
             eventPanel.Visible = true;
             eventPanel.Size = new Size(300, 60);
 
             Label name = new Label();
             name.Text = ec[position].Name;
             name.Location = new Point(0, 0);
-            name.Size = new Size(300, 40);
-            name.Font = new Font("Segoe Script", 20F);
+            name.Size = new Size(300, 20);
+            name.Font = new Font("Segoe Script", 14F);
             name.Click += new EventHandler(eventPanel_MouseClick);
 
             Label importance = new Label();
             importance.Text = Convert.ToString(ec[position].Importance);
             importance.Location = new Point(0, 30);
             importance.Size = new Size(50, 40);
-            importance.Font = new Font("Segoe Script", 16F);
+            importance.Font = new Font("Segoe Script", 13F);
             importance.Click += new EventHandler(eventPanel_MouseClick);
 
             Label date = new Label();
             date.Text = ec[position].Due.ToString("yyyy/MMM/dd H:mm");
             date.Location = new Point(60, 30);
             date.Size = new Size(300, 40);
-            date.Font = new Font("Segoe Script", 16F);
+            date.Font = new Font("Segoe Script", 13F);
             date.Click += new EventHandler(eventPanel_MouseClick);
 
             eventPanel.Controls.Add(name);
@@ -105,16 +105,17 @@ namespace Reminder
             Control control = this.Parent;
             control.Controls.Clear();
             List<EventClass> ec2 = EventReader.DeserializeFromXML();
-	    int b = 0;
+            int b = 0;
             for (int i = 0; i < ec2.Count; i++)
             {
-		if(ec[i].IsFinished != true)
-		{
-		    Event list = new Event(ec2, i);
-		    list.Size = new Size(300, 60);
-		    list.Location = new Point(0, (b++) * 60 + 40);
-		    control.Controls.Add(list);
-		}
+                if (ec2[i].IsFinished != true)
+                {
+                    Event list = new Event(ec2, i);
+                    list.Size = new Size(300 - 2, 60);
+                    list.Location = new Point(0, b * 60 + b);
+                    b++;
+                    control.Controls.Add(list);
+                }
             }
         }
 
@@ -125,16 +126,17 @@ namespace Reminder
             Control control = this.Parent;
             control.Controls.Clear();
             List<EventClass> ec2 = EventReader.DeserializeFromXML();
-	    int b = 0;
+            int b = 0;
             for (int i = 0; i < ec2.Count; i++)
             {
-		if(ec[i].IsFinished != true)
-		{
-		    Event list = new Event(ec2, i);
-		    list.Size = new Size(300, 60);
-		    list.Location = new Point(0, (b++) * 60 + 40);
-		    control.Controls.Add(list);
-		}
+                if (ec2[i].IsFinished != true)
+                {
+                    Event list = new Event(ec2, i);
+                    list.Size = new Size(300 - 2, 60);
+                    list.Location = new Point(0, b * 60 + b);
+                    b++;
+                    control.Controls.Add(list);
+                }
             }
         }
 
@@ -148,12 +150,17 @@ namespace Reminder
             control.Controls.Clear();
             List<EventClass> ec2 = EventReader.DeserializeFromXML();
             Console.WriteLine(ec2.Count);
+            int b = 0;
             for (int i = 0; i < ec2.Count; i++)
             {
-                Event list = new Event(ec2, i);
-                list.Size = new Size(300, 60);
-                list.Location = new Point(0, i * 60 + 40);
-                control.Controls.Add(list);
+                if (ec2[i].IsFinished != true)
+                {
+                    Event list = new Event(ec2, i);
+                    list.Size = new Size(300 - 2, 60);
+                    list.Location = new Point(0, b * 60 + b);
+                    b++;
+                    control.Controls.Add(list);
+                }
             }
             eventPanel.Visible = true;
             controlPanel.Visible = false;

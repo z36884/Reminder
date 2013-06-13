@@ -23,6 +23,8 @@ namespace Reminder
         PictureBox prev, next;
         List<String> events;
         int curNum, totalNum;
+        bool isEdit;
+        EventClass eventClass;
 
         public CreateEventForm()
         {
@@ -32,10 +34,33 @@ namespace Reminder
         public CreateEventForm(EventClass ec)
         {
             InitializeComponent();
+            isEdit = true;
+            this.eventClass = ec;
             nameTextBox.Text = ec.Name;
             picker.Value = ec.Due;
             if (ec.IsMultiEvent == true)
+            {
                 typeComboBox.SelectedIndex = 1;
+                series.Controls.Clear();
+                totalNum = ec.Eventlist.Count;
+                series.Text = "Event 1/" + totalNum;
+                for (int i = 1; i <= ec.Eventlist.Count; i++)
+                {
+                    String aEvent = ec.Eventlist[i-1];
+                    Console.WriteLine(aEvent);
+                    seriesTextBox[i] = new TextBox();
+                    seriesTextBox[i].Text = aEvent;
+                    seriesTextBox[i].Location = new Point(25, 30);
+                    seriesTextBox[i].KeyUp += seriesTextBox_KeyUp;
+                    series.Controls.Add(seriesTextBox[i]);
+                    if (i != 1)
+                        seriesTextBox[i].Visible = false;
+                }
+                series.Controls.Add(prev);
+                series.Controls.Add(next);
+                if (totalNum > 1)
+                    next.Visible = true;
+            }
             else
                 typeComboBox.SelectedIndex = 0;
             switch (ec.Importance)
@@ -50,6 +75,7 @@ namespace Reminder
                     importanceComboBox.SelectedIndex = 2;
                     break;
             }
+            ok.Text = "Edit";
         }
 
         public TextBox NameTextBox
@@ -81,6 +107,7 @@ namespace Reminder
             importance = new GroupBox();
             type = new GroupBox();
             series = new GroupBox();
+            isEdit = false;
 
             // closeButton
             closeButton = new CloseButton(20, 20);
@@ -238,10 +265,20 @@ namespace Reminder
             switch (e.KeyCode)
             {
                 case Keys.Escape:
+                    if (isEdit)
+                    {
+                        List<EventClass> elist = new List<EventClass>();
+                        try
+                        {
+                            elist = EventReader.DeserializeFromXML();
+                        }
+                        catch { }
+                        elist.Add(eventClass);
+                        EventWriter.SerializeToXML(elist);
+                    }
                     this.Dispose();
                     break;
                 case Keys.Enter:
-                    Console.WriteLine("enter");
                     break;
             }
         }

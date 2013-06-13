@@ -16,8 +16,8 @@ namespace Reminder
         PictureBox sort;
         PictureBox finish;
 
-	private Panel listPanel;
-	private int sortMethod = 1;
+        private Panel listPanel;
+        private int sortMethod = 1;
 
         private void InitializeComponent()
         {
@@ -38,11 +38,34 @@ namespace Reminder
             sort = new AddButton(30, 30);
             sort.Location = new Point(50, 470);
             sort.MouseClick += sort_MouseClick;
-          
+
             // finish 
             finish = new AddButton(30, 30);
             finish.Location = new Point(100, 470);
             finish.MouseClick += finish_MouseClick;
+
+            //Event
+            listPanel = new Panel();
+            listPanel.Size = new Size(300 - 2, 430 - 4);
+            listPanel.Location = new Point(0 + 1, 40 + 2);
+            try
+            {
+                List<EventClass> ec = EventReader.DeserializeFromXML();
+                int b = 0;
+                for (int i = 0; i < ec.Count; i++)
+                {
+                    if (ec[i].IsFinished != true)
+                    {
+                        Event list = new Event(ec, i);
+                        list.Size = new Size(300 - 2, 60);
+                        list.Location = new Point(0, b * 60 + b);
+                        b++;
+                        listPanel.Controls.Add(list);
+                    }
+                }
+            }
+            catch { }
+            listPanel.AutoScroll = true;
 
             // MainForm
             this.FormBorderStyle = FormBorderStyle.None;
@@ -53,27 +76,6 @@ namespace Reminder
             this.Controls.Add(adder);
             this.Controls.Add(sort);
             this.Controls.Add(finish);
-
-	    //Event
-	    listPanel = new Panel();
-            listPanel.Size = new Size(300, 500);
-            try
-            {
-                List<EventClass> ec = EventReader.DeserializeFromXML();
-		int b = 0;
-		for (int i = 0; i < ec.Count; i++)
-		{
-		    if(ec[i].IsFinished != true)
-		    {
-			Event list = new Event(ec, i);
-			list.Size = new Size(300, 60);
-			list.Location = new Point(0, (b++) * 60 + 40);
-			listPanel.Controls.Add(list);
-		    }
-		}
-	    }
-            catch { }
-	    listPanel.AutoScroll = true;
             this.Controls.Add(listPanel);
 
             this.ResumeLayout(false);
@@ -89,23 +91,24 @@ namespace Reminder
         public void sort_MouseClick(object sender, MouseEventArgs e)
         {
             Sort();
-	}
+        }
 
         public void finish_MouseClick(object sender, MouseEventArgs e)
         {
-	    listPanel.Controls.Clear();
-	    List<EventClass> ec2 = EventReader.DeserializeFromXML();
-	    int b = 0;
-	    for(int i=0;i<ec2.Count;i++)
-	    {
-		if(ec2[i].IsFinished == true)
-		{
-		    Event list = new Event(ec2, i);
-		    list.Size = new Size(300, 60);
-		    list.Location = new Point(0, (b++)*60+40);
-		    listPanel.Controls.Add(list);
-		}
-	    }
+            listPanel.Controls.Clear();
+            List<EventClass> ec2 = EventReader.DeserializeFromXML();
+            int b = 0;
+            for (int i = 0; i < ec2.Count; i++)
+            {
+                if (ec2[i].IsFinished == true)
+                {
+                    Event list = new Event(ec2, i);
+                    list.Size = new Size(300, 60);
+                    list.Location = new Point(0, b * 60 + b);
+                    b++;
+                    listPanel.Controls.Add(list);
+                }
+            }
         }
 
         public void Sort()
@@ -116,16 +119,17 @@ namespace Reminder
                 listPanel.Controls.Clear();
                 List<EventClass> ec2 = EventReader.DeserializeFromXML();
                 ec2.Sort((x, y) => { return x.Due.CompareTo(y.Due); });
-		int b = 0;
+                int b = 0;
                 for (int i = 0; i < ec2.Count; i++)
                 {
-		    if(ec2[i].IsFinished != true)
-		    {
-			Event list = new Event(ec2, i);
-			list.Size = new Size(300, 60);
-			list.Location = new Point(0, (b++) * 60 + 40);
-			listPanel.Controls.Add(list);
-		    }
+                    if (ec2[i].IsFinished != true)
+                    {
+                        Event list = new Event(ec2, i);
+                        list.Size = new Size(300 - 2, 60);
+                        list.Location = new Point(0, b * 60 + b);
+                        b++;
+                        listPanel.Controls.Add(list);
+                    }
                 }
             }
             else if (sortMethod == 0)
@@ -134,16 +138,17 @@ namespace Reminder
                 listPanel.Controls.Clear();
                 List<EventClass> ec2 = EventReader.DeserializeFromXML();
                 ec2.Sort((x, y) => { return -x.Importance.CompareTo(y.Importance); });
-		int b = 0;
+                int b = 0;
                 for (int i = 0; i < ec2.Count; i++)
                 {
-		    if(ec2[i].IsFinished != true)
-		    {
-			Event list = new Event(ec2, i);
-			list.Size = new Size(300, 60);
-			list.Location = new Point(0, (b++) * 60 + 40);
-			listPanel.Controls.Add(list);
-		    }
+                    if (ec2[i].IsFinished != true)
+                    {
+                        Event list = new Event(ec2, i);
+                        list.Size = new Size(300 - 2, 60);
+                        list.Location = new Point(0, b * 60 + b);
+                        b++;
+                        listPanel.Controls.Add(list);
+                    }
                 }
             }
         }
