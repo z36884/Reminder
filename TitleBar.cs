@@ -30,7 +30,7 @@ namespace Reminder
 
             // close
             CloseButton close = new CloseButton(20, 20);
-            close.Location = new Point(220, 5);
+            close.Location = new Point(268, 10);
 
             // TitleBar
             this.MouseDown += titleBarMouseDown;

@@ -18,7 +18,7 @@ namespace Reminder
 
             this.Image = map;
             this.Size = new Size(width, height);
-            this.BackColor = Color.Violet;
+            this.BackColor = Color.FromArgb(45, 45, 48);
             this.MouseEnter += AddButton_MouseEnter;
             this.MouseLeave += AddButton_MouseLeave;
         }
