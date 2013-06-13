@@ -18,7 +18,7 @@ namespace Reminder
 
             this.Image = map;
             this.Size = new Size(width, height);
-            this.BackColor = Color.FromArgb(45, 45, 48);
+            this.BackColor = Color.DimGray;
             this.MouseEnter += CloseButton_MouseEnter;
             this.MouseLeave += CloseButton_MouseLeave;
             this.MouseClick += CloseButton_MouseClick;
@@ -40,13 +40,13 @@ namespace Reminder
 
         void CloseButton_MouseEnter(object sender, EventArgs e)
         {
-            this.BackColor = Color.Turquoise;
+            this.BackColor = Color.FromArgb(120, 120, 120);
             Application.DoEvents();
         }
 
         void CloseButton_MouseLeave(object sender, EventArgs e)
         {
-            this.BackColor = Color.FromArgb(45, 45, 48);
+            this.BackColor = Color.DimGray;
             Application.DoEvents();
         }
 

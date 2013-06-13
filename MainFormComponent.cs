@@ -35,12 +35,18 @@ namespace Reminder
             adder.MouseClick += adder_MouseClick;
 
             // sort 
-            sort = new AddButton(30, 30);
+            sort = new PictureBox();
+            sort.Size = new Size(30, 30);
+            sort.Image = Image.FromFile("sort.png");
+            sort.SizeMode = PictureBoxSizeMode.StretchImage;
             sort.Location = new Point(50, 470);
             sort.MouseClick += sort_MouseClick;
 
             // finish 
-            finish = new AddButton(30, 30);
+            finish = new PictureBox();
+            finish.Size = new Size(30, 30);
+            finish.Image = Image.FromFile("finish.png");
+            finish.SizeMode = PictureBoxSizeMode.StretchImage;
             finish.Location = new Point(100, 470);
             finish.MouseClick += finish_MouseClick;
 
@@ -85,6 +91,7 @@ namespace Reminder
         {
             CreateEventForm form = new CreateEventForm();
             form.ShowDialog();
+            sortMethod = sortMethod == 1 ? 0 : 1;
             Sort();
         }
 

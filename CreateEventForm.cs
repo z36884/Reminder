@@ -78,28 +78,6 @@ namespace Reminder
             ok.Text = "Edit";
         }
 
-        public TextBox NameTextBox
-        {
-            get
-            {
-                return nameTextBox;
-            }
-        }
-        public DateTimePicker Picker
-        {
-            get
-            {
-                return picker;
-            }
-        }
-        public ComboBox TypeComboBox
-        {
-            get
-            {
-                return typeComboBox;
-            }
-        }
-
         public void InitializeComponent()
         {
             title = new GroupBox();
@@ -111,12 +89,12 @@ namespace Reminder
 
             // closeButton
             closeButton = new CloseButton(20, 20);
-            closeButton.Location = new Point(260, 10);
+            closeButton.Location = new Point(240, 10);
 
             #region title
             // name textbox
             nameTextBox = new TextBox();
-            nameTextBox.Location = new Point(25, 30);
+            nameTextBox.Location = new Point(25, 35);
             nameTextBox.Size = new Size(200, 10);
             nameTextBox.Font = new Font(nameTextBox.Font.FontFamily, 12F);
             nameTextBox.Name = "nameTextBox";
@@ -124,8 +102,8 @@ namespace Reminder
             nameTextBox.MaxLength = 20;
 
             // name group box
-            title.Location = new Point(10, 25);
-            title.BackColor = Color.Gray;
+            title.Location = new Point(10, 40);
+            title.BackColor = Color.DimGray;
             title.Size = new Size(groupboxWidth, 80);
             title.Name = "title";
             title.Text = "Title";
@@ -136,7 +114,7 @@ namespace Reminder
             #region due
             // due date time picker
             picker = new DateTimePicker();
-            picker.Location = new Point(25, 30);
+            picker.Location = new Point(25, 35);
             picker.Font = new Font(picker.Font.FontFamily, 12F);
             picker.Name = "picker";
             picker.Format = DateTimePickerFormat.Custom;
@@ -144,8 +122,8 @@ namespace Reminder
             picker.KeyDown += keyDown;
 
             // due group box
-            due.Location = new Point(10, 110);
-            due.BackColor = Color.Gray;
+            due.Location = new Point(10, 125);
+            due.BackColor = Color.DimGray;
             due.Size = new Size(groupboxWidth, 80);
             due.Name = "due";
             due.Text = "Due";
@@ -156,7 +134,7 @@ namespace Reminder
             #region importance
             // importance combo box
             importanceComboBox = new ComboBox();
-            importanceComboBox.Location = new Point(25, 30);
+            importanceComboBox.Location = new Point(25, 35);
             importanceComboBox.Font = new Font(importanceComboBox.Font.FontFamily, 12F);
             importanceComboBox.Name = "importanceComboBox";
             importanceComboBox.Items.Add("Whatever");
@@ -167,8 +145,8 @@ namespace Reminder
             importanceComboBox.KeyDown += keyDown;
 
             // importance group box
-            importance.Location = new Point(10, 195);
-            importance.BackColor = Color.Gray;
+            importance.Location = new Point(10, 210);
+            importance.BackColor = Color.DimGray;
             importance.Size = new Size(groupboxWidth, 80);
             importance.Name = "importance";
             importance.Text = "Importance";
@@ -179,7 +157,7 @@ namespace Reminder
             #region type
             // type combo box
             typeComboBox = new ComboBox();
-            typeComboBox.Location = new Point(25, 30);
+            typeComboBox.Location = new Point(25, 35);
             typeComboBox.Font = new Font(typeComboBox.Font.FontFamily, 12F);
             typeComboBox.Name = "typeComboBox";
             typeComboBox.Items.Add("Single");
@@ -190,8 +168,8 @@ namespace Reminder
             typeComboBox.SelectedIndexChanged += typeComboBox_SelectedIndexChanged;
 
             // type group box
-            type.Location = new Point(10, 280);
-            type.BackColor = Color.Gray;
+            type.Location = new Point(10, 295);
+            type.BackColor = Color.DimGray;
             type.Size = new Size(groupboxWidth, 80);
             type.Name = "type";
             type.Text = "Type";
@@ -203,26 +181,32 @@ namespace Reminder
             // button
             ok = new Button();
             ok.BackColor = Color.Red;
-            ok.Location = new Point(10, 365);
-            ok.Size = new Size(groupboxWidth, 80);
+            ok.Location = new Point(10, 380);
+            ok.Size = new Size(groupboxWidth, 60);
+            ok.FlatStyle = FlatStyle.Flat;
             ok.Name = "ok";
             ok.Text = "Add";
+            ok.Font = new Font(ok.Font.FontFamily, 20F);
             ok.Click += ok_Click;
             #endregion
 
             #region series
             // series
             prev = new PictureBox();
-            prev.Location = new Point(5, 30);
+            prev.Image = Image.FromFile("right.png");
+            prev.Location = new Point(10, 40);
             prev.Size = new Size(20, 20);
-            prev.BackColor = Color.Honeydew;
+            prev.BackColor = Color.DimGray;
+            prev.SizeMode = PictureBoxSizeMode.StretchImage;
             prev.Visible = false;
             prev.Click += prev_Click;
 
             next = new PictureBox();
-            next.Location = new Point(195, 30);
+            next.Image = Image.FromFile("left.png");
+            next.Location = new Point(220, 40);
             next.Size = new Size(20, 20);
-            next.BackColor = Color.Honeydew;
+            next.BackColor = Color.DimGray;
+            next.SizeMode = PictureBoxSizeMode.StretchImage;
             next.Visible = false;
             next.Click += next_Click;
 
@@ -230,14 +214,16 @@ namespace Reminder
 
             seriesTextBox = new TextBox[101];
             seriesTextBox[1] = new TextBox();
-            seriesTextBox[1].Location = new Point(25, 30);
+            seriesTextBox[1].Location = new Point(35, 35);
+            seriesTextBox[1].Font = new Font(seriesTextBox[1].Font.FontFamily, 12F);
+            seriesTextBox[1].Size = new Size(180, 10);
             seriesTextBox[1].KeyUp += seriesTextBox_KeyUp;
 
             series.Text = "Events 1/1";
-            series.Location = new Point(10, 365);
+            series.Location = new Point(10, 380);
             series.Size = new Size(groupboxWidth, 80);
             series.Font = new Font(typeComboBox.Font.FontFamily, 20F);
-            series.BackColor = Color.Gray;
+            series.BackColor = Color.DimGray;
             series.Controls.Add(prev);
             series.Controls.Add(next);
             series.Controls.Add(seriesTextBox[1]);
@@ -250,7 +236,7 @@ namespace Reminder
             this.MouseDown += formMouseDown;
             this.MouseUp += formMouseUp;
             this.MouseMove += formMouseMove;
-            this.BackColor = Color.Gray;
+            this.BackColor = Color.DimGray;
             this.Controls.Add(closeButton);
             this.Controls.Add(title);
             this.Controls.Add(due);
@@ -340,7 +326,10 @@ namespace Reminder
                     for (int i = 1; i <= totalNum; i++)
                         if (seriesTextBox[i].Text != "")
                             events.Add(seriesTextBox[i].Text);
-                    newEvent = new EventClass(nameTextBox.Text, picker.Value, importanceNum, false, true, events);
+                    if(events.Count == 0)
+                        newEvent = new EventClass(nameTextBox.Text, picker.Value, importanceNum, false, false, null);
+                    else
+                        newEvent = new EventClass(nameTextBox.Text, picker.Value, importanceNum, false, true, events);
                     elist.Add(newEvent);
                     break;
             }
@@ -355,13 +344,13 @@ namespace Reminder
                 case "Single":
                     series.Visible = false;
                     this.Size = new Size(270, 470);
-                    ok.Location = new Point(10, 365);
+                    ok.Location = new Point(10, 380);
                     Application.DoEvents();
                     break;
                 case "Multiple":
                     series.Visible = true;
                     this.Size = new Size(270, 555);
-                    ok.Location = new Point(10, 450);
+                    ok.Location = new Point(10, 465);
                     Application.DoEvents();
                     break;
             }
@@ -395,7 +384,9 @@ namespace Reminder
             {
                 totalNum++;
                 seriesTextBox[totalNum] = new TextBox();
-                seriesTextBox[totalNum].Location = new Point(25, 30);
+                seriesTextBox[totalNum].Location = new Point(35, 35);
+                seriesTextBox[totalNum].Font = new Font(seriesTextBox[totalNum].Font.FontFamily, 12F);
+                seriesTextBox[totalNum].Size = new Size(180, 10);
                 seriesTextBox[totalNum].KeyUp += seriesTextBox_KeyUp;
                 series.Controls.Add(seriesTextBox[totalNum]);
                 next.Visible = false;
