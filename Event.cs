@@ -11,6 +11,7 @@ namespace Reminder
         private Panel controlPanel;
         private List<EventClass> ec;
         private int position;
+        private Label process;
         private Label name;
         private Label subtitle;
         private Label date;
@@ -76,8 +77,25 @@ namespace Reminder
 
         public void check_MouseClick_Multi(object sender, EventArgs e)
         {
-            ec[position].Eventlist.RemoveAt(0);
-            if (ec[position].Eventlist.Count == 0)
+	    int j = 0;
+	    for(j=0;j<ec[position].Eventdone.Count;j++)
+	    {
+		int t = Convert.ToInt32(ec[position].Eventdone[j]);
+		if(t == 0)
+		{
+		    ec[position].Eventdone[j] = "1";
+		    break;
+		}
+	    }
+
+	    int k = 0;
+	    foreach(string a in ec[position].Eventdone)
+	    {
+		int t = Convert.ToInt32(a);
+		if(t == 1) k++;
+	    }
+
+	    if(k == ec[position].Eventdone.Count)
             {
                 ec[position].IsFinished = true;
                 ec[position].IsMultiEvent = false;
@@ -108,7 +126,8 @@ namespace Reminder
             }
             else
             {
-                subtitle.Text = ec[position].Eventlist[0];
+		process.Text = k.ToString()+"/"+ec[position].Eventdone.Count.ToString();
+                subtitle.Text = ec[position].Eventlist[j+1];
                 eventPanel.Visible = true;
                 controlPanel.Visible = false;
             }
@@ -196,24 +215,49 @@ namespace Reminder
         {
             setText();
 
+            process = new Label();
+
+	    int i = 0;
+	    foreach(string a in ec[position].Eventdone)
+	    {
+		int t = Convert.ToInt32(a);
+		if(t == 1) i++;
+	    }
+	    process.Text = i.ToString()+"/"+ec[position].Eventdone.Count.ToString();
+
+	    for(i=0;i<ec[position].Eventdone.Count;i++)
+	    {
+		int t = Convert.ToInt32(ec[position].Eventdone[i]);
+		if(t == 0)
+		{
+		    break;
+		}
+	    }
+
+	    process.Size = new Size (50,30);
+            process.Font = new Font("微軟正黑體", 14F);
+            process.Click += new EventHandler(eventPanel_MouseClick);
+
             name = new Label();
             name.Text = ec[position].Name;
-            name.Size = new Size(300 - 2, 30);
+            name.Size = new Size(270 - 2, 30);
             name.Font = new Font("微軟正黑體", 14F);
             name.Click += new EventHandler(eventPanel_MouseClick);
 
             subtitle = new Label();
-            subtitle.Text = ec[position].Eventlist[0];
+            subtitle.Text = ec[position].Eventlist[i];
             subtitle.Size = new Size(200, 30);
             subtitle.Font = new Font("微軟正黑體", 13F);
             subtitle.Click += new EventHandler(eventPanel_MouseClick);
 
             eventPanel.Size = new Size(300 - 2, 85);
             subtitle.Location = new Point(20, 30);
-            name.Location = new Point(0, 0);
+            process.Location = new Point(0, 0);
+            name.Location = new Point(50, 0);
             importance.Location = new Point(0, 55);
             date.Location = new Point(110, 55);
 
+            eventPanel.Controls.Add(process);
             eventPanel.Controls.Add(name);
             eventPanel.Controls.Add(subtitle);
         }

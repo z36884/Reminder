@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Reminder
 {
-    public class EventClass
+    public class EventClass 
     {
         private string name;
         private DateTime due;
@@ -18,12 +18,13 @@ namespace Reminder
         private bool isOverDated;
         private bool isMultiEvent;
         private List<String> eventlist;
+        private List<String> eventdone;
 
         public EventClass()
         {
         }
 
-        public EventClass(string name, DateTime due, int importance, bool isFinished, bool isMultiEvent, List<String> eventlist)
+        public EventClass(string name, DateTime due, int importance, bool isFinished, bool isMultiEvent, List<String> eventlist, List<String> eventdone)
         {
             this.name = name;
             this.due = due;
@@ -36,6 +37,7 @@ namespace Reminder
                 this.isOverDated = false;
             this.isMultiEvent = isMultiEvent;
             this.eventlist = eventlist;
+	    this.eventdone = eventdone;
         }
 
         public string Name
@@ -80,6 +82,12 @@ namespace Reminder
         {
             get { return eventlist; }
             set { eventlist = value; }
+        }
+
+        public List<String> Eventdone
+        {
+            get { return eventdone; }
+            set { eventdone = value; }
         }
 
         public int ArraylistNumber
