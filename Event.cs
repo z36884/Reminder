@@ -107,15 +107,14 @@ namespace Reminder
 
             Label name = new Label();
             name.Text = ec[position].Name;
-            name.Location = new Point(0, 0);
+            name.Location = new Point(200, 4);
             name.Size = new Size(100, 40);
-            name.Font = new Font("Segoe Script", 14F);
+            name.Font = new Font("Segoe Script", 16F);
             name.Click += new EventHandler(eventPanel_MouseClick);
 	    
             Label subtitle = new Label();
-	    System.Console.WriteLine("AAA");
-            //subtitle.Text = ec[position].Eventlist[0];
-            subtitle.Location = new Point(100, 0);
+            subtitle.Text = ec[position].Eventlist[0];
+            subtitle.Location = new Point(0, 0);
             subtitle.Size = new Size(200, 40);
             subtitle.Font = new Font("Segoe Script", 20F);
             subtitle.Click += new EventHandler(eventPanel_MouseClick);

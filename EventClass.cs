@@ -78,6 +78,7 @@ namespace Reminder
         public List<String> Eventlist
         {
             get { return eventlist; }
+            set { eventlist = value; }
         }
 
         public int ArraylistNumber
