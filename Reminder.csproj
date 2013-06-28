@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,14 +36,27 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateEventForm.cs" />
+    <Compile Include="CloseButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Event.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EventWriter.cs" />
+    <Compile Include="CreateEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventClass.cs" />
+    <Compile Include="EventReader.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainFormComponent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Run.cs" />
+    <Compile Include="Run.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TitleBar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -51,6 +65,13 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
